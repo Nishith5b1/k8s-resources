@@ -1,0 +1,89 @@
+54.82.25.40 | 172.31.10.212 | t3.micro | https://github.com/Nishith5b1/k8s-resources.git
+[ ec2-user@ip-172-31-10-212 ~/k8s-resources ]$ k describe pod nginx
+Name:             nginx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             ip-192-168-18-155.ec2.internal/192.168.18.155
+Start Time:       Mon, 31 Aug 2026 01:29:41 +0000
+Labels:           environment=dev
+                  project=roboshop
+                  purpose=poc
+Annotations:      <none>
+Status:           Running
+IP:               192.168.28.136
+IPs:
+  IP:  192.168.28.136
+Containers:
+  nginx:
+    Container ID:   containerd://20a318e35d2dfa7726fc6d8f183f052580080db2535ea51c184bc6129dd9f6b5
+    Image:          nginx
+    Image ID:       docker.io/library/nginx@sha256:b34848eff6db786b6b1282d3a9c3fd0b5563dfb6d261df4923378b419e0d24f0
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Mon, 31 Aug 2026 01:29:44 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zgm72 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-zgm72:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  5m2s   default-scheduler  Successfully assigned default/nginx to ip-192-168-18-155.ec2.internal
+  Normal  Pulling    5m1s   kubelet            spec.containers{nginx}: Pulling image "nginx"
+  Normal  Pulled     4m59s  kubelet            spec.containers{nginx}: Successfully pulled image "nginx" in 2.422s (2.422s including waiting). Image size: 63348835 bytes.
+  Normal  Created    4m59s  kubelet            spec.containers{nginx}: Created container: nginx
+  Normal  Started    4m59s  kubelet            spec.containers{nginx}: Started container nginx
+
+54.82.25.40 | 172.31.10.212 | t3.micro | https://github.com/Nishith5b1/k8s-resources.git
+[ ec2-user@ip-172-31-10-212 ~/k8s-resources ]$ k exec -it nginx -- /bin/bash
+root@nginx:/# curl http://localhost
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, nginx is successfully installed and working.
+Further configuration is required for the web server, reverse proxy,
+API gateway, load balancer, content cache, or other features.</p>
+
+<p>For online documentation and support please refer to
+<a href="https://nginx.org/">nginx.org</a>.<br/>
+To engage with the community please visit
+<a href="https://community.nginx.org/">community.nginx.org</a>.<br/>
+For enterprise grade support, professional services, additional
+security features and capabilities please refer to
+<a href="https://f5.com/nginx">f5.com/nginx</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+root@nginx:/#
+exit
