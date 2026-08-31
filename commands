@@ -1,0 +1,9 @@
+k exec -it nginx -- /bin/bash # login to the pod
+
+[ ec2-user@ip-172-31-10-212 ~/k8s-resources ]$ k get pod multi-container -o jsonpath='{.spec.containers[*].name}' # to check how many contianers inside pod
+nginx almalinux
+
+kubectl exec -it multi-container -c <container-name> -- /bin/bash # to log in to the one of contianers inside pod
+
+kubectl logs multi-container -c nginx --previous
+kubectl logs multi-container -c almalinux --previous
