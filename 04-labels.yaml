@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: labels-demo
+  labels:
+    project: roboshop
+    environment: dev
+    purpose: poc
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+
+
+#Purpose: Identify and select objects
+
+#Used by selectors (Services, Deployments, ReplicaSets, NetworkPolicies) to group and target resources
+#Queryable — you can filter on them with kubectl get pods -l app=nginx
+#Kubernetes' internal machinery actively uses them to establish relationships between objects (e.g., a Service finding its pods)
+
+
+#Rule of thumb: if you'll ever need to find objects by this value, use a label. If it's just extra info riding along with the object (build info, contact details, tool-specific config like Prometheus scrape settings or ingress controller directives), use an annotation.
+
+#A common real-world example: Ingress controllers rely heavily on annotations to configure behavior (like nginx.ingress.kubernetes.io/rewrite-target) since that config is specific to the controller and doesn't need to be selectable.
