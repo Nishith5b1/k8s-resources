@@ -21,4 +21,4 @@ spec:
   - name: nginx-logs
     # this creates intially empty directory in the node where pod scheduled
     emptyDir:
-      sizeLimit: 500mi
+      sizeLimit: 500Mi
